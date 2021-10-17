@@ -21,7 +21,9 @@
     "@apollo/client": "^3.4.16",
     "express": "^4.17.1",
     "graphql": "^15.6.1",
-    "mongoose": "^6.0.10"
+    "mongoose": "^6.0.10",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^2.0.4"
   },
   "devDependencies": {
     "concurrently": "^6.3.0"
