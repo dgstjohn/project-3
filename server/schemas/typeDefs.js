@@ -11,7 +11,7 @@ const typeDefs = gql`
     }
 
     type Bets {
-        betId: _ID!
+        betId: ID!
         team: String!
         amount: Int!
         spread: Int!
