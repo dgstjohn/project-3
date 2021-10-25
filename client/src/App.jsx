@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import { Switch, Route } from 'react-router-dom'
 
 import "semantic-ui-css/semantic.min.css";
-
+/* 
 import {
   Button,
   Divider,
@@ -13,12 +14,14 @@ import {
   Label,
   Menu,
   Table
-} from "semantic-ui-react";
+} from "semantic-ui-react"; */
 
 import "./App.css";
+import HomePage from './pages/HomePage'
+import Hamburger from './pages/Hamburger'
 
 class App extends Component {
-  state = {
+/*   state = {
     dropdownMenuStyle: {
       display: "none"
     }
@@ -33,11 +36,19 @@ class App extends Component {
     }
 
     this.setState(newState);
-  };
+  }; */
 
   render() {
     return (
       <div className="App">
+        <Switch>
+          <Route exact path='/' component={HomePage} />
+          <Route exact path='/test' render={()=><h1>Test</h1>} />
+          <Route exact path='/hamburger' component={Hamburger} />
+
+        </Switch>
+{/* 
+
         <Grid padded className="tablet computer only">
           <Menu borderless inverted fluid fixed="top">
             <Menu.Item header as="a">
@@ -314,7 +325,7 @@ class App extends Component {
               </Grid.Row>
             </Grid>
           </Grid.Column>
-        </Grid>
+        </Grid> */}
       </div>
     );
   }
