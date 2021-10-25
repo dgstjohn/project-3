@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Order } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
@@ -19,27 +19,27 @@ const resolvers = {
         // MUST adjust code below for Bet model
 
         checkout: async (parent, args, context) => {
-            const order = new Order({ products: args.products });
-            const { products } = await order.populate('products').execPopulate();
+            const order = new Order({ bets: args.bets });
+            const { bets } = await order.populate('bets').execPopulate();
             const line_items = [];
 
-            for (let i = 0; i < products.length; i++) {
+            for (let i = 0; i < bets.length; i++) {
                 // generate product id
-                const product = await stripe.products.create({
-                    name: products[i].name,
-                    description: products[i].description
+                const bets = await stripe.bets.create({
+                    team: bets[i].team,
+                    amount: bets[i].amount
                 });
 
                 // generate price id using the product id
                 const price = await stripe.prices.create({
-                    product: product.id,
-                    unit_amount: products[i].price * 100,
+                    bet: bets.id,
+                    unit_amount: bets[i].amount * 100,
                     currency: 'usd',
                 });
 
                 // add price id to the line items array
                 line_items.push({
-                    price: price.id,
+                    amount: amount.id,
                     quantity: 1
                 });
             }
@@ -50,9 +50,9 @@ const resolvers = {
                 mode: 'payment',
                 success_url: 'https://example.com/success?session_id={CHECKOUT_SESSION_ID}',
                 cancel_url: 'https://example.com/cancel'
-              });
-              
-              return { session: session.id };
+            });
+
+            return { session: session.id };
         }
     },
 
@@ -101,6 +101,15 @@ const resolvers = {
                 return updatedUser;
             }
             throw new AuthenticationError('Not logged in');
+        },
+        
+        // ask about the next two 
+
+        removeBet: async (parent, args, context) => {
+            if (context.user) {
+                const updatedUser = await User.delete({ _id: betId });
+                return updatedUser;
+            }
         },
 
         removeAccount: async (parent, args, context) => {
