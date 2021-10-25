@@ -8,3 +8,5 @@ const httpLink = createHttpLink({
     link: httpLink,
     cache: new InMemoryCache(),
   });
+
+export default App;

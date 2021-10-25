@@ -106,19 +106,18 @@ const resolvers = {
 
     // ask about the next two
 
-    removeBet: async (parent, args, context) => {
-      if (context.user) {
-        const updatedUser = await User.delete({ _id: betId });
-        return updatedUser;
-      }
-    },
-
-    removeAccount: async (parent, args, context) => {
-      if (context.user) {
-        const updatedUser = await User.delete({ _id: user.id });
-        return updatedUser;
-      }
-    },
+    // removeBet: async (parent, args, context) => {
+    //   if (context.user) {
+    //     const updatedUser = await User.delete({ _id: betId });
+    //     return updatedUser;
+    //   }
+    // },
+    // removeAccount: async (parent, args, context) => {
+    //   if (context.user) {
+    //     const updatedUser = await User.delete({ _id: user.id });
+    //     return updatedUser;
+    //   }
+    // },
   },
 };
 
