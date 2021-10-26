@@ -42,7 +42,7 @@ userSchema.methods.isCorrectPassword = async function (password) {
 };
 
 userSchema.virtual("placedBets").get(function () {
-  return this.savedBets.length;
+    return this.savedBets.length;
 });
 
 const User = model("User", userSchema);

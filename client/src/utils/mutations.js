@@ -42,22 +42,9 @@ mutation updateBet($betId: ID!) {
     }
 }`;
 
-export const REMOVE_BET = gql`
-mutation removeBet($betId; ID!) {
-    removeBet (betId: $betId) {
-        team
-        amount
-        spread
-    }
-}`;
-
 export const REMOVE_ACCOUNT = gql`
 mutation removeAccount($userId: ID!) {
     removeAccount(userId: $userId) {
-        user {
-            _id
-            username
-        }
-        savedBets
+        // *** check for values here ***
     }
 }`;
