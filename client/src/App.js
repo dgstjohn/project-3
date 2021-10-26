@@ -9,6 +9,8 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import Hamburger from "./pages/Hamburger";
 import Homepage from "./pages/HomePage";
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -33,6 +35,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
+        <Nav />
         <>
           <Switch>
             <Route exact path="/" component={Hamburger} />
@@ -40,6 +43,7 @@ function App() {
             <Route render={() => <h1 className="display-2">Wrong page!</h1>} />
           </Switch>
         </>
+        <Footer />
       </Router>
     </ApolloProvider>
   );
