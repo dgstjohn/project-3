@@ -1,61 +1,52 @@
-import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
-import { setContext } from "@apollo/client/link/context"
-
-import Login from "./components/login.comp";
-import SignUp from "./components/signup.comp";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  ApolloProvider,
+  ApolloClient,
+  InMemoryCache,
+  createHttpLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import Hamburger from "./pages/Hamburger";
+import Homepage from "./pages/HomePage";
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 
 const httpLink = createHttpLink({
-    uri: 'http://localhost:3001/graphql',
-  });
-  
-  const authLink = setContext((_, { headers }) => {
-    const token = localStorage.getItem("id_token");
-    return {
-      headers: {
-        ...headers,
-        authorization: token ? `Bearer ${token}` : "",
-      },
-    };
-  });
+  uri: "/graphql",
+});
 
-  const client = new ApolloClient({
-    link: httpLink,
-    cache: new InMemoryCache(),
-  });
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem("id_token");
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  };
+});
 
-  
-  function App() {
-    return (<Router>
-      <div className="App">
-        <nav className="navbar navbar-expand-lg navbar-light fixed-top">
-          <div className="container">
-            <Link className="navbar-brand" to={"/sign-in"}>positronX.io</Link>
-            <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-              <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  <Link className="nav-link" to={"/sign-in"}>Login</Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to={"/sign-up"}>Sign up</Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-  
-        <div className="auth-wrapper">
-          <div className="auth-inner">
-            <Switch>
-              <Route exact path='/' component={Login} />
-              <Route path="/sign-in" component={Login} />
-              <Route path="/sign-up" component={SignUp} />
-            </Switch>
-          </div>
-        </div>
-      </div></Router>
-    );
-  }
-  
-  export default App;
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
+
+function App() {
+  return (
+    <ApolloProvider client={client}>
+      <Router>
+        <Nav />
+        <>
+          <Switch>
+            <Route exact path="/" component={Hamburger} />
+            <Route exact path="/homepage" component={Homepage} />
+            <Route render={() => <h1 className="display-2">Wrong page!</h1>} />
+          </Switch>
+        </>
+        <Footer />
+      </Router>
+    </ApolloProvider>
+  );
+}
+
+export default App;

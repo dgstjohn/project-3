@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route } from 'react-router-dom'
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "semantic-ui-css/semantic.min.css";
 /* 
 import {
   Button,
