@@ -7,7 +7,7 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import Hamburger from "./pages/Hamburger";
+// import Hamburger from "./pages/Hamburger";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -41,7 +41,7 @@ function App() {
         <>
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/" component={Hamburger} />
+            {/* <Route exact path="/" component={Hamburger} /> */}
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route render={() => <h1 className="display-2">Wrong page!</h1>} />

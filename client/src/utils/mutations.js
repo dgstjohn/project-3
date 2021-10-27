@@ -35,7 +35,7 @@ export const SAVE_BET = gql`
 `;
 
 export const UPDATE_BET = gql`
-  mutation updateBet($betId: ID!) {
+  mutation updateBet($betId: String!) {
     updateBet(betId: $betId) {
       team
       amount
@@ -45,7 +45,7 @@ export const UPDATE_BET = gql`
 `;
 
 export const REMOVE_BET = gql`
-mutation removeBet($betId: ID!) {
+mutation removeBet($betId: String!) {
     removeBet (betId: $betId) {
         team
         amount
