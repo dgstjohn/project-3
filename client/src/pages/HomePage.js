@@ -10,7 +10,7 @@ import {
     Label,
     Menu,
     Table
-  } from "semantic-ui-react";
+  } from "react-bootstrap";
 
   import { Component } from 'react'
 
