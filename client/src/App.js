@@ -8,7 +8,9 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import Hamburger from "./pages/Hamburger";
-import Homepage from "./pages/HomePage";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 
@@ -38,8 +40,10 @@ function App() {
         <Nav />
         <>
           <Switch>
+            <Route exact path="/" component={Home} />
             <Route exact path="/" component={Hamburger} />
-            <Route exact path="/homepage" component={Homepage} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={Signup} />
             <Route render={() => <h1 className="display-2">Wrong page!</h1>} />
           </Switch>
         </>
