@@ -18,7 +18,6 @@ export const ADD_USER = gql`
       token
       user {
         username
-        email
       }
     }
   }
@@ -45,13 +44,14 @@ export const UPDATE_BET = gql`
 `;
 
 export const REMOVE_BET = gql`
-mutation removeBet($betId: String!) {
-    removeBet (betId: $betId) {
-        team
-        amount
-        spread
+  mutation removeBet($betId: String!) {
+    removeBet(betId: $betId) {
+      team
+      amount
+      spread
     }
-}`;
+  }
+`;
 
 export const REMOVE_ACCOUNT = gql`
   mutation removeAccount($userId: ID!) {
