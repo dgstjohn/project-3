@@ -1,6 +1,6 @@
 import React from "react";
 import FindGame from "../components/FindGame";
-import BetGame from "../components/BetGame";
+// import BetGame from "../components/BetGame";
 
 const Home = () => {
   return (

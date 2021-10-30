@@ -77,7 +77,7 @@ function Nav() {
                   <a
                     className="nav-link active"
                     aria-current="page"
-                    href="/signup"
+                    href="/sign-up"
                   >
                     Signup
                   </a>
