@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { Card, Container, Button } from 'react-bootstrap';
-import Auth from '../../utils/auth';
+import Card from "react-bootstrap/Card";
+import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
+import Auth from "../../utils/auth";
 
-const FindGame = () => {
-    // create state for holding searched games
-    const [searchedGames, setSearchedGames] = useState([]);
+function FindGame() {
+  // create state for holding searched games
+  const [searchedGames, setSearchedGames] = useState([]);
 
     // show all games
     const gamesList = () => {
