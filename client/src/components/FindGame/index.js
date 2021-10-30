@@ -1,6 +1,6 @@
-import React from "react";
-import { Card, CardColumns } from 'react-bootstrap';
-import Auth from '../utils/auth';
+import React, { useState } from "react";
+import { Card, Container, Button } from 'react-bootstrap';
+import Auth from '../../utils/auth';
 
 const FindGame = () => {
     // create state for holding searched games
@@ -8,52 +8,45 @@ const FindGame = () => {
 
     // show all games
     const gamesList = () => {
-        try {
-            const response = await fetch(process.env.SEARCH_ODDS);
-            if (!response.ok) {
-                throw new Error('Something went wrong!');
-            }
-            const { games } = await response.json();
+        const games = () => {
+            fetch('https://api.the-odds-api.com/v4/sports/americanfootball_nfl/odds?regions=us&oddsFormat=american&apiKey=86b8c8f2a4d55411e2cf0c32aa4c1800')
+            .then(response => response.json())
+            .then(data => console.log('This is the response', data))
+        };
 
-            const gamesData = games.map((game) => ({
-                gameId: game.id,
-                homeTeam: game.home_team,
-                awayTeam: game.away_team
-            }));
+        const gamesArr = games();
 
-            setSearchedGames(gamesData);
-        } catch (err) {
-            console.error(err)
-        }
-    };
+        const gamesData = gamesArr.map(data => ({
+            gameId: games.id,
+            homeTeam: games.home_team,
+            awayTeam: games.away_team
+        }));
 
-    const chooseGame = () => {
+        setSearchedGames(gamesData);
 
     };
 
     return (
         <>
             <Container>
-                <CardColumns>
-                    {gamesList.map((game) => {
-                        return (
-                            <Card key={game.gameId} border='dark'>
-                                <Card.Body>
-                                    <Card.Text>{game.awayTeam}
-                                        `at`
-                                        {game.homeTeam}</Card.Text>
-                                    {Auth.loggedIn() && (
-                                        <Button
-                                            className='btn-block btn-info'
-                                            // click switches to BetGame component
-                                            onClick={() => chooseGame(game.gameId)}>
-                                        </Button>
-                                    )}
-                                </Card.Body>
-                            </Card>
-                        );
-                    })}
-                </CardColumns>
+                {gamesList((game) => {
+                    return (
+                        <Card key={game.gameId} border='dark'>
+                            <Card.Body>
+                                <Card.Text>{game.awayTeam}
+                                    `at`
+                                    {game.homeTeam}</Card.Text>
+                                {Auth.loggedIn() && (
+                                    <Button
+                                        className='btn-block btn-info'
+                                        // click switches to BetGame page
+                                        onClick={() => FindGame(game.gameId)}>
+                                    </Button>
+                                )}
+                            </Card.Body>
+                        </Card>
+                    );
+                })}
             </Container>
         </>
     )
