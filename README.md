@@ -31,7 +31,7 @@ The application is deployed to Heroku.
 
 # Screenshot of Application
 
-![Odds-and-Ends-Screenshot](https://user-images.githubusercontent.com/83373330/139620418-ef94a1d2-318d-4259-ab09-94f4f0690bc6.png)
+![Odds-and-Ends-Screenshot](https://user-images.githubusercontent.com/83373330/139620629-c3b058a9-1cb5-48e9-a890-d7ac9b9ad08c.png)
 
 # Link to Deployed Application
 
