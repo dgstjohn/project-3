@@ -31,8 +31,8 @@ The application is deployed to Heroku.
 
 # Screenshot of Application
 
-[placeholder](placeholder)
+![Odds-and-Ends-Screenshot](https://user-images.githubusercontent.com/83373330/139620629-c3b058a9-1cb5-48e9-a890-d7ac9b9ad08c.png)
 
 # Link to Deployed Application
 
-[placeholder](placeholder)
+[Odds and Ends](https://gory-witch-52040.herokuapp.com/)
