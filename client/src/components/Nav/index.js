@@ -8,7 +8,7 @@ function Nav() {
       return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="container-fluid">
-            <a className="navbar-brand" href="#">
+            <a className="navbar-brand" href="/home">
               Navbar
             </a>
             <button
@@ -25,7 +25,7 @@ function Nav() {
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav">
                 <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="#">
+                  <a className="nav-link active" aria-current="page" href="/findGame">
                     Home
                   </a>
                 </li>
@@ -57,7 +57,7 @@ function Nav() {
       return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="container-fluid">
-            <a className="navbar-brand" href="#">
+            <a className="navbar-brand" href="/home">
               Navbar
             </a>
             <button
@@ -77,7 +77,7 @@ function Nav() {
                   <a
                     className="nav-link active"
                     aria-current="page"
-                    href="/sign-up"
+                    href="/signup"
                   >
                     Signup
                   </a>
@@ -100,7 +100,7 @@ function Nav() {
   }
 
   return (
-    <header className="w-100">
+    <header>
       <nav>{showNavigation()}</nav>
       <h1 className="text-center">
         <Link className="text-white" to="/">Odds and Ends</Link>

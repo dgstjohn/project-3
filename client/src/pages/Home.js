@@ -1,13 +1,13 @@
 import React from "react";
 import FindGame from "../components/FindGame";
+import Container from "react-bootstrap/Container"
 // import BetGame from "../components/BetGame";
 
 const Home = () => {
   return (
-    <div className="container">
-      <FindGame />
-      {/* <BetGame /> */}
-    </div>
+    <Container>
+      <h3>homepage.jpg</h3>
+    </Container>
   );
 };
 

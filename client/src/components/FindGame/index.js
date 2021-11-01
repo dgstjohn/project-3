@@ -52,9 +52,7 @@ function FindGame() {
                     return (
                         <Card key={game.gameId} border='dark'>
                             <Card.Body>
-                                <Card.Text>{game.awayTeam}
-                                    `at`
-                                    {game.homeTeam}</Card.Text>
+                                <Card.Text>{game.awayTeam} at {game.homeTeam}</Card.Text>
                                 {Auth.loggedIn() && (
                                     <Button
                                         className='btn-block btn-info'
