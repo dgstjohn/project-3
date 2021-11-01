@@ -17,8 +17,15 @@ const typeDefs = gql`
         spread: Int!
     }
 
+    type Team {
+        _id: ID!
+        homeTeam: String!
+        awayTeam: String!
+    }
+
     type Query {
         me: User
+        teams: [Team]
         checkout(bets: [ID]!): Checkout
     }
 
@@ -27,6 +34,7 @@ const typeDefs = gql`
         addUser(username: String!, email: String!, password: String!): Auth
         saveBet(betId: ID!): Bets
         updateBet(betId: ID!): Bets
+        removeBet(betId: ID!): Bets
         removeAccount(userId: ID!): User
     }
 

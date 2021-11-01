@@ -1,50 +1,59 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import Nav from "./components/Nav"
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import SignUp from "./pages/Signup";
+import FindGame from "./components/FindGame";
+import BetGame from "./components/BetGame";
 
-import Login from "./components/login.comp";
-import SignUp from "./components/signup.comp";
+import { setContext } from '@apollo/client/link/context';
+
 
 const httpLink = createHttpLink({
-    uri: 'http://localhost:3001/graphql',
-  });
-  
-  const client = new ApolloClient({
-    link: httpLink,
-    cache: new InMemoryCache(),
-  });
+  uri: '/graphql',
+});
 
-  
-  function App() {
-    return (<Router>
-      <div className="App">
-        <nav className="navbar navbar-expand-lg navbar-light fixed-top">
-          <div className="container">
-            <Link className="navbar-brand" to={"/sign-in"}>positronX.io</Link>
-            <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-              <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  <Link className="nav-link" to={"/sign-in"}>Login</Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to={"/sign-up"}>Sign up</Link>
-                </li>
-              </ul>
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('id_token');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
+
+
+function App() {
+  return (
+    <ApolloProvider client={client}>
+      <Router>
+        <Nav />
+        <div className="App">
+          <div className="auth-wrapper">
+            <div className="auth-inner">
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/signup" component={SignUp} />
+                <Route exact path="/betGame/:id" component={BetGame} />
+                <Route exact path='/findGame' component={FindGame} />
+              </Switch>
             </div>
           </div>
-        </nav>
-  
-        <div className="auth-wrapper">
-          <div className="auth-inner">
-            <Switch>
-              <Route exact path='/' component={Login} />
-              <Route path="/sign-in" component={Login} />
-              <Route path="/sign-up" component={SignUp} />
-            </Switch>
-          </div>
         </div>
-      </div></Router>
-    );
-  }
-  
-  export default App;
+        <Footer />
+      </Router>
+    </ApolloProvider>
+  );
+}
+
+export default App;
