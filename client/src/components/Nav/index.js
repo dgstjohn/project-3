@@ -9,7 +9,7 @@ function Nav() {
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="container-fluid">
             <a className="navbar-brand" href="/home">
-              Navbar
+              Odds and Ends
             </a>
             <button
               className="navbar-toggler"
@@ -29,7 +29,7 @@ function Nav() {
                     Home
                   </a>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <a
                     className="nav-link active"
                     aria-current="page"
@@ -37,7 +37,7 @@ function Nav() {
                   >
                     Your Bet History
                   </a>
-                </li>
+                </li> */}
                 <li className="nav-item">
                   {/* this is not using the Link component to logout or user and then refresh the application to the start */}
                   <a
@@ -58,7 +58,7 @@ function Nav() {
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="container-fluid">
             <a className="navbar-brand" href="/home">
-              Navbar
+              Odds and Ends
             </a>
             <button
               className="navbar-toggler"

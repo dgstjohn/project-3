@@ -6,7 +6,7 @@ import Container from "react-bootstrap/Container"
 const Home = () => {
   return (
     <Container>
-      <h3>homepage.jpg</h3>
+      <h3>Bet this week's NFL games here! Just log in or sign up if you don't have an account, and then you'll see this week's contests.</h3>
     </Container>
   );
 };
