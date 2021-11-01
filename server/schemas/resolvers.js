@@ -1,4 +1,4 @@
-const { User, Order } = require("../models");
+const { User, Team, Order } = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
 const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
@@ -16,7 +16,10 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
-    // MUST adjust code below for Bet model
+
+    teams: async (parent, args) => {
+      return Team.find();
+    },
 
     checkout: async (parent, args, context) => {
       const order = new Order({ bets: args.bets });
@@ -74,12 +77,14 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+
     addUser: async (parent, args) => {
       const user = await User.create(args);
 
       const token = signToken(user);
       return { token, user };
     },
+
     saveBet: async (parent, { input }, context) => {
       console.log(context.user);
       if (context.user) {
@@ -92,6 +97,7 @@ const resolvers = {
       }
       throw new AuthenticationError("Not logged in");
     },
+
     updateBet: async (parent, { input }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
@@ -104,20 +110,19 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
-    // ask about the next two
+    removeBet: async (parent, args, context) => {
+      if (context.user) {
+        const updatedUser = await User.delete({ _id: betId });
+        return updatedUser;
+      }
+    },
 
-    // removeBet: async (parent, args, context) => {
-    //   if (context.user) {
-    //     const updatedUser = await User.delete({ _id: betId });
-    //     return updatedUser;
-    //   }
-    // },
-    // removeAccount: async (parent, args, context) => {
-    //   if (context.user) {
-    //     const updatedUser = await User.delete({ _id: user.id });
-    //     return updatedUser;
-    //   }
-    // },
+    removeAccount: async (parent, args, context) => {
+      if (context.user) {
+        const updatedUser = await User.delete({ _id: user.id });
+        return updatedUser;
+      }
+    },
   },
 };
 
